@@ -1,3 +1,5 @@
+local history = require('alexiraola.history')
+
 local M = {}
 
 local api = vim.api
@@ -65,6 +67,8 @@ local function update_view(direction)
   vim.api.nvim_buf_set_option(buf, 'modifiable', true)
   position = position + direction
   if position < 0 then position = 0 end
+
+  history.get_shell()
 
   local result = vim.api.nvim_call_function('systemlist', {
       -- 'git diff-tree --no-commit-id --name-only -r HEAD~'..position
